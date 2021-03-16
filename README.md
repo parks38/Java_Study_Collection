@@ -3,5 +3,4 @@
 
 | Topic | Folder |
 | ------------- | ------------- |
-| Base64Encoder | Content Cell  |
-| Content Cell  | Content Cell  |
+| Encode/Decode | Base64Encoder |
