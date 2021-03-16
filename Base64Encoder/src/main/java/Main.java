@@ -22,7 +22,7 @@ public class Main {
      * @return result : base64 변환된 문자열
      */
     public static String encodeResult(Encoder encoder) {
-        String encode = "f-lab base64 encoding\"";
+        String encode = "f-lab base64 encoding";
         String result = encoder.basicToBase64(encode);
         System.out.println(result);
         return result;

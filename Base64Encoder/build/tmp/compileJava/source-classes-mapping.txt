@@ -2,7 +2,7 @@ Encoder.java
  Encoder
 Main.java
  Main
+Base64.java
+ Base64
 Decoder.java
  Decoder
-AsciiTable.java
- AsciiTable

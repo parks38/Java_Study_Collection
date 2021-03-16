@@ -5,7 +5,7 @@
  *      2. 변환된 6 비트 데이터를 8 비트 데이터로 변환시켜줍니다.
  *      3. 변환된 8 비트 데이터를 ASCII table에 매핑되어 있는 문자열을 생성합니다.
  */
-public class Decoder extends AsciiTable{
+public class Decoder extends Base64 {
     public StringBuilder result;
     public StringBuilder binary;
 
