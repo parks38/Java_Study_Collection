@@ -11,13 +11,13 @@ import java.util.HashMap;
  * - 6바이트 -> 8 바이트 혹은 8 바이트 -> 6 바이트로 변환 기능
  * - binaryCode를 숫자로 변환시켜주는 기능
  */
-public class AsciiTable {
+public class Base64 {
     public static final int BASIC_BINARY = 8;
     public static final int BASE64_BINARY = 6;
     public static final int LEAST_COMMON_NUM = 24;
     public static HashMap<Integer, Character> binaryToBase64;
 
-    public AsciiTable() {
+    public Base64() {
         binaryToBase64 = new HashMap<>();
         insertToBase64();
     }

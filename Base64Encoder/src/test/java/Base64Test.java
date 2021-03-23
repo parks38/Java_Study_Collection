@@ -1,12 +1,12 @@
 import org.junit.jupiter.api.Test;
 
 import java.util.HashMap;
-public class AsciiTableTest {
+public class Base64Test {
     public static final int BASIC_BINARY = 8;
     public static final int BASE64_BINARY = 6;
     public static HashMap<Integer, Character> binaryToBase64;
 
-    public AsciiTableTest() {
+    public Base64Test() {
         binaryToBase64 = new HashMap<>();
         insertToBase64();
     }

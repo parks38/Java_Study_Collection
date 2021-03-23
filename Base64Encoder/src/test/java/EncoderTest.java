@@ -1,6 +1,4 @@
-import org.junit.jupiter.api.Test;
-
-public class EncoderTest extends AsciiTableTest{
+public class EncoderTest extends Base64Test {
     public StringBuilder convertBinary;
     public StringBuilder result;
 

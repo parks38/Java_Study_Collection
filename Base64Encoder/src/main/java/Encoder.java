@@ -10,7 +10,7 @@
  *  3. 변환된 6 비트 데이터를 Base64 table을 참고하여 문자열을 생성합니다.
  *
  */
-public class Encoder extends AsciiTable{
+public class Encoder extends Base64 {
     public StringBuilder convertBinary;
     public StringBuilder result;
 
