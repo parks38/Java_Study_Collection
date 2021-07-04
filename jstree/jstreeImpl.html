@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title> treegrid9 </title>
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"> </script>
+    <style>
+        .tree-indent {
+            width: 16px;
+            display: inline-block;
+            position: relative;
+        }
+    </style>
+    <script>
+		/*
+		 데이터(JSON)를 트리형(계층형)으로 보여 주기 위해 들여쓰기
+		 : 자식 노드에서 부모 노드 지정
+		*/
+        var option = [
+            //{ field: "task" }
+            { field: "text" }
+        ];
+        var data =
+            // [
+            // 	{ id: "hello", parent: "", "task": "job1" },
+            // 	{ id: "2", parent: "hello", "task": "job2" },
+            // 	{ id: "bye", "task": "job3", parent: "" },
+            // 	{ id: "4", "task": "job4", parent: "bye" },
+            // 	{ id: "tech", parent: "", "task": "Tech 직군" },
+            // 	{ id: "front", parent: "", "task": "Front-end" },
+            // 	{ id: "back", parent: "", "task": "Back-end" } // # 사용 금지 !!!
+            // ];
+            [
+                { id: "tech", parent: "", "text": "Tech 직군" },
+                { id: "front", parent: "tech", "text": "Front-end" },
+                { id: "back", parent: "tech", "text": "Back-end" },
+                { id: "3", parent: "front", "text": "Html" },
+                { id: "4", parent: "front", "text": "CSS" },
+                { id: "5", parent: "front", "text": "JavaScript" },
+                { id: "java", parent: "back", "text": "Java" },
+                { id: "6", parent: "java", "text": "Spring Framework" },
+                { id: "7", parent: "java", "text": "MySQL" },
+                { id: "8", parent: "java", "text": "JPA" },
+                { id: "node", parent: "back", "text": "Node.js" },
+                { id: "9", parent: "node", "text": "MongoDB" }
+            ];
+        var parentPattern = /tree-parent-([A-Za-z0-9_-]+)/;
+
+        // window.onload = function () { //javascript 
+        $(document).ready(function () { //jQuery
+            var tree = $("#tree");
+            var table = $("<table>").appendTo(tree);
+
+            $.each(data, function (index, row) {
+                var tr = $("<tr>").addClass("tree-" + row.id);
+                var depth = 0;
+                if (row.parent) {
+                    tr.insertAfter($(".tree-" + row.parent));
+                    tr.addClass("tree-parent-" + row.parent);
+                    depth = getDepth(row.parent);
+                } else {
+                    tr.appendTo(table);
+                }
+                $.each(option, function (i, fieldInfo) {
+                    var td = $("<td>").appendTo(tr);
+                    if (i === 0 && depth > 0) {
+                        for (var i = 0; i < depth; i++) {
+                            $("<span>").appendTo(td).addClass("tree-indent");
+                        }
+                    }
+                    td.html(td.html() + row[fieldInfo.field]); //  화면 출력 
+                });
+            });
+        })
+
+        function getDepth(id) {
+            var depth = 1;
+            var parent = $(".tree-" + id);
+            while (parent) {
+                if (parentPattern.test(parent.attr('class'))) {
+                    id = parentPattern.exec(parent.attr('class'))[1];
+                } else {
+                    break;
+                }
+                parent = $(".tree-" + id);
+                depth++;
+            };
+            return depth;
+        }
+		/**
+		 *  정규식 표현 만들기
+		 *  RegExp 의 - test & exec 메소드
+		 *  exec : 대응되는 문자열을 찾는 RegExp 메소드입니다. 정보를 가지고 있는 배열을 반환합니다.
+		 * 	       대응되는 문자열을 찾지 못했다면 null을 반환
+		 *  test : 대응되는 문자열이 있는지 검사하는 RegExp 메소드 입니다. true 나 false를 반환합니다.
+		 * */
+    </script>
+</head>
+
+<body>
+    <div id="tree"></div>
+</body>
+
+</html>
