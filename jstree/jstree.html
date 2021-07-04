@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/themes/default/style.min.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/jstree.min.js"></script>
+    <script>
+        $(function () {
+            $('#jstree').jstree({
+                "core": {
+                    'data': [
+                        { "id": "tech", "parent": "#", "text": "Tech 직군" },
+                        { "id": "front", "parent": "tech", "text": "Front-end" },
+                        { "id": "back", "parent": "tech", "text": "Back-end" },
+                        { "id": "3", "parent": "front", "text": "Html" },
+                        { "id": "4", "parent": "front", "text": "CSS" },
+                        { "id": "5", "parent": "front", "text": "JavaScript" },
+                        { "id": "java", "parent": "back", "text": "Java" },
+                        { "id": "6", "parent": "java", "text": "Spring Framework" },
+                        { "id": "7", "parent": "java", "text": "MySQL" },
+                        { "id": "8", "parent": "java", "text": "JPA" },
+                        { "id": "node", "parent": "back", "text": "Node.js" },
+                        { "id": "9", "parent": "node", "text": "MongoDB" }
+                    ]
+                }
+            });
+        });
+    </script>
+</head>
+
+<body>
+    <div id="jstree"></div>
+</body>
+
+</html>
