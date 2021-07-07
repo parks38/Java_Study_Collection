@@ -47,6 +47,15 @@
         var parentPattern = /tree-parent-([A-Za-z0-9_-]+)/;
 
         // window.onload = function () { //javascript 
+	 /**
+             * <table>
+             *  <tr>
+             *     <td>
+             * 
+             *  <ul>
+             *      <li> 
+             * */
+            //var table = $("<table>").appendTo(tree);
         $(document).ready(function () { //jQuery
             var tree = $("#tree");
             var table = $("<table>").appendTo(tree);
@@ -58,9 +67,12 @@
                     tr.insertAfter($(".tree-" + row.parent));
                     tr.addClass("tree-parent-" + row.parent);
                     depth = getDepth(row.parent);
-                } else {
-                    tr.appendTo(table);
                 }
+                // } else {
+                //     // parent node 없을 경우 TABLE 에 append 
+                //     tr.appendTo(table);
+                // }
+                // option = text		    
                 $.each(option, function (i, fieldInfo) {
                     var td = $("<td>").appendTo(tr);
                     if (i === 0 && depth > 0) {
@@ -68,10 +80,19 @@
                             $("<span>").appendTo(td).addClass("tree-indent");
                         }
                     }
+                    // 선택한 요소 안의 내용을 가져오거나, 다른 내용으로 바꿉니다			
                     td.html(td.html() + row[fieldInfo.field]); //  화면 출력 
                 });
             });
         })
+            /**
+             * 
+             *  <table> 
+             *      <tr class = "tree-tech"> <td> Tech 직군 </td> </tr>
+             *      <tr class = "tree-back tree-parent-tech" > <td> 
+             *          <span class = "tree-indent"></span> "Back-end"
+             *          </td>   </tr>  
+             * */
 
         function getDepth(id) {
             var depth = 1;
