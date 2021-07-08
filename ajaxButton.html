@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./js/jquery-1.11.3.min.js"></script>
+
+
+
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+
+            $("#btn1").click(function () {
+                $.ajax({
+
+                    type: "post",
+                    url: "./list.json",
+                    dataType: "text",
+                    success: function (data) {
+
+                        $.each(JSON.parse(data), function (index, entry) {
+
+                            console.log("menu : " + entry["menu"] + ", page " + entry["page"]);
+
+                            $("#" + entry["menu"]).html(entry["menu"] + ", page " + entry["page"]);
+
+                        });
+
+                    }
+                });
+
+            });
+
+        });
+
+    </script>
+
+</head>
+
+<body>
+
+    <div id="human"></div>
+
+    <div id="animal"></div>
+
+    <div id="fruit"></div>
+
+    <button id="btn1">button</button>
+
+</body>
+
+</html>
