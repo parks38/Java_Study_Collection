@@ -1,10 +1,10 @@
 ## Javascript vs. JQuery 
-------------|--------------
+
 |Javacript | JQuery |
 |-----------|----------|
 | document.addEventListener('DOMContentLoaded', function() {}); | $(function(){}); |
 | document.ready(function() {}); | $(function(){}); |
-------------|--------------
+
 
 ### ('선택자').css('attribute', 'value); 
 : css 스타일 변경
