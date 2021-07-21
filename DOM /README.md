@@ -1,6 +1,7 @@
 ## Javascript vs. JQuery 
 --------------------------
 |Javacript | JQuery |
+|-----------|----------|
 | document.addEventListener('DOMContentLoaded', function() {}); | $(function(){}); |
 | document.ready(function() {}); | $(function(){}); |
 --------------------------
@@ -71,3 +72,16 @@ $(function() {
 - A.attr('b', 'c') = a 요소의 b라는 속성의 값을 c 로 변경 
 
 ### AJAX (asynchronous Javascript and XML)
+````
+$(function(){
+    $.ajax({
+        url: /url.jsp,
+        type: 'POST',
+        data: 요청변수 설정,
+        dataType: jsontype,
+        crossDomain : true
+    }).success:function(jsonStr) { //주소 검색 결과 json 데이터 
+
+    }
+})
+````
