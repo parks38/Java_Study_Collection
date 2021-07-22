@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class = "row" id = "ro">
+        <div class="col-xs-5">
+            <input type = "text" id = "copy_element" value = "12341234" class = "form-control" />
+        </div>
+        <br>
+        <div class="col-xs-2" id = "but">
+            <button type="button" id="copy_btn" class="btn btn-info"> 클립복사 </button>
+        </div>
+    </div>
+    <script>
+        $(document).ready(function() {
+            $('#copy_btn').click(function(){
+                $('#copy_element').select();
+                // document.execCommand() : copy, paste 기능 제공 
+                //document.execCommand(command, showUI, value)
+                document.execCommand('copy'); 
+                alert('복사완료');
+                // 밑에 복사된 텍스트 적어주기 
+                //('#but').append('<div>' + $text + '</div>');
+                // button 아래 append 
+                //$('#ro').append('<div>' + $text + '</div>');
+                // <div id = "but"> 아래 하단의 새로운 <div> 로 생성 
+                // var $pasteText = document.execCommand("paste"); : true , false not text
+                //var paste = navigator.clipboard.writeText();
+                //$('#ro').append('<div>' + paste + '</div>');
+            });
+        });
+    </script>
+</body>
+</html>
