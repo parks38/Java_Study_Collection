@@ -27,11 +27,98 @@
         |__ 캘리포니아
     |__ 일본
 
+    나라
+    ---------
+    한국     미국       일본 
+    ---    ------    -----
+    서울     워싱턴
+    부산     캘리
+
+    <ul class = "one>
+        <li> menu 1 
+            <ul class = "two">
+                <li> sub 1
+                    <ul class = "three"> 
+                        <li> sub1-1
+
     ** 트리구조 똑같이 하고 다르게만하면 되는거 같은데?? 
 -->
 </head>
 <body>
-    <div ></div>
+    <div id="header"></div>
+    <!--
+        원하는 포맷 : 
+
+    -->
+    <script>
+        var data = [
+            {id : 1, parent : 0, top : 1, name: "나라"},
+            {id : 2, parent : 1, top : 1, name: "한국"},
+            {id : 3, parent : 2, top : 1, name: "서울"},
+            {id : 4, parent : 2, top : 1, name: "부산"},
+            {id : 5, parent : 1, top : 1, name: "미국"},
+            {id : 6, parent : 5, top : 1, name: "워싱턴"},
+            {id : 7, parent : 5, top : 1, name: "캘리포니아"},
+            {id : 8, parent : 1, top : 0, name: "일본"}
+        ];
+
+
+        $(document).ready(function(){
+            
+            /**
+             * Each - array 나 특정 object/선택자 검사/관리하는 함수 
+             * 콜백 함수 : index(순번), item(데이터)
+             * 
+             * 배열 
+             * $.each(배열객체, function(index, item)){
+                //하고 싶은 내용
+                });
+             * 선택자 
+             $("선택자").each(function(index, item)){
+                //하고 싶은 내용
+                }); 
+
+            //append
+            $("ul").append("<li>new menu</li>");
+            
+            //appendTo
+            $("<li>new menu</li>").appendTo("ul"); 
+            **/
+            $(data).each(function(index, row){
+                console.log($(this).text);
+                var ul = $('<ul>').addClass(row.parent);
+                    //<ul class = "0">
+                // if(row.parent != 0){
+                //     ul.insertAfter($(row.par))
+                // }
+
+                $(option).each(function(i, fieldInfo) {
+                    var li = $('<li>').appendTo(ul);
+                })
+            });
+        });
+    </script>
+<!--
+    <ul>
+        <li> 나라 </li>
+        <ul class="나라">
+            <li> 한국 </li>
+                <ul class = "한국">
+                    <li> 서울 </li>
+                    <li> 부산 </li>
+                </ul>
+            <li> 미국 </li>
+                <ul class = "미국">
+                    <li> 워싱턴 </li>
+                    <li> 캘리포니아 </li>
+                </ul>
+            <li> 일본 </li>
+        </ul>
+    </ul> 
     
+    ul - parent.id 
+    조건 li.parent = ul.id 
+    li - id.name 
+-->
 </body>
 </html>
