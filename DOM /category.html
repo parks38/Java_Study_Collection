@@ -104,14 +104,17 @@
             var $ul = $('<ul>').appendTo('#header').addClass(".category-0");
 
             $.each(data, function (index, item) {
-                if (!$('<ul>').hasClass(".category-" + item.parent)) {
-                    var topli = $('<li>').find(".category-" + item.parent);
-                    var liVal = $('<ul>' + item.name + '</ul>');
-                    topli.append(liVal).addClass('.category-' + item.id);
+                if ($("ul").hasClass(".category-" + item.parent) != true) {
+                    console.log("here");
+                    var newVal = '<ul class= ".category-' + item.parent + '"> </ul>';
+                    console.log(newVal);
+                    $(newVal).insertAfter('li .category-' + item.parent);
                 }
-                var $item = '<li>' + item.name + '</li>';
-                $($item).appendTo($ul).addClass(".category-" + item.id);
 
+                // make it a 상위 category
+                var itemVal = '<li>' + item.name + '</li>';
+                //$('ul').append(itemVal);
+                $(itemVal).appendTo('ul').addClass('.category-' + item.id);
             });
 
             $('#header').html($ul);
