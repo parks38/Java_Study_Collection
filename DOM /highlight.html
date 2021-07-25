@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"> </script>
+
+    <style>
+
+    </style>
+</head>
+
+<body>
+
+    <h1>Hello World</h1>
+
+    <p>Click the button to create a "class" attribute with the value "democlass" and insert it to the H1 element above.
+    </p>
+
+    <button onclick="myFunction()">Try it</button>
+
+    <script>
+
+        $(document).ready(function () {
+
+            $('button').click(function () {
+                //$('#highlight').css("background-color", "yellow");
+                $("h1:contains('Hello')").css("background-color", "yellow");
+            });
+        });
+    </script>
+
+</body>
+
+</html>
