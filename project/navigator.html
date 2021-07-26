@@ -4,27 +4,114 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"> </script>
     <title>Document</title>
 </head>
 
 <body>
     <div class="item">
-        <a href="">
-            <span>item item </span>
+        <a href="" class="category-1">
+            <span> </span>
         </a>
 
-        <div class="subwrap">
-            <li>
+        <!-- <div class="subwrap category-1">
+        <ul class="category-1"> //parent 
+            <li class="category-1">
                 <strong>
                     sun iem
                 </strong>
             </li>
-            <ul>
+            <ul class = "category-2">
                 <li> item 1</li>
             </ul>
+        </ul>
 
-        </div>
+        </div> -->
     </div>
+
+    <div class="item">
+        <a href="" class="category-9">
+            <span> </span>
+        </a>
+    </div>
+
+    <script>
+        var data = [
+            { id: 1, parent: 0, top: 1, name: "나라", count: 1, depth: 0, navigation: ["나라"] },
+            { id: 9, parent: 0, top: 9, name: "음식", count: 2, depth: 0, navigation: ["음식"] },
+            { id: 2, parent: 1, top: 1, name: "한국", count: 3, depth: 1, navigation: ["나라", "한국"] },
+            { id: 5, parent: 1, top: 1, name: "미국", count: 2, depth: 1, navigation: ["나라", "미국"] },
+            { id: 8, parent: 1, top: 1, name: "일본", count: 2, depth: 1, navigation: ["나라", "일본"] },
+            { id: 3, parent: 2, top: 1, name: "서울", count: 1, depth: 2, navigation: ["나라", "한국", "서울"] },
+            { id: 4, parent: 2, top: 1, name: "부산", count: 3, depth: 2, navigation: ["나라", "한국", "부산"] },
+            { id: 6, parent: 5, top: 1, name: "워싱턴", count: 4, depth: 2, navigation: ["나라", "미국", "워싱턴"] },
+            { id: 7, parent: 5, top: 1, name: "캘리포니아", count: 5, depth: 2, navigation: ["나라", "미국", "캘리포니아"] }
+        ];
+
+        // count 는 그냥 백단에서 가공해 오는걸로 !!! 
+        // Map <String, Integer> eachCount
+        // eachCount {나라 : 1, 음식 : 2, 한국 : 3, 미국 : 2}
+
+        // Map navigation <String, List<String>>
+        // depth = 1 parent - id  
+        // depth == 2 top - parent - id
+
+        // eachCount 에 다시 합산 
+        // 나라 : List<String> contains ("나라") -> count 변경 
+        // navigator.values().stream().anyMatch(list -> list.contains("나라")) 의 key 를 가져와서 
+        // key 의 each Count 모두 더해준다. 
+
+
+        $(document).ready(function () {
+            $.each(data, function (index, item) {
+                $('a.category-' + item.id).find('span').html(item.name + " (" + item.count + ")");
+
+                if ($('div').hasClass('category-' + item.top) === false) {
+                    $('a.category-' + item.top).after('<div class="subwrap category-' + item.id + '"> </div>');
+                    const $ulCategory = '<ul class="category-' + item.id + '">';
+                    $($ulCategory).appendTo('div.category-' + item.id);
+                    // 받아온 navigation list 으로 navigation bar  만들기 
+                    $('ul.category-' + item.id).data("address", item.navigation);
+                    console.log($('ul.category-' + item.id).data('address'));
+                } else {
+                    //console.log("here");
+                    if ($('ul').hasClass('category-' + item.parent) === false) {
+                        $('li.category-' + item.parent).after('<ul class = "category-' + item.parent + '">');
+                    }
+
+
+                    //json length 구할 때 -- item.navigation.length 
+                    if (Object.keys(item.navigation).length == 2) {
+                        const $liList = '<li> <strong>' + item.name + " " + item.count + '</strong> </li>'
+                        $($liList).appendTo('ul.category-' + item.parent).addClass('category-' + item.id);
+
+                    } else {
+                        const $liList = '<li>' + item.name + " " + item.count + '</li>'
+                        $($liList).appendTo('ul.category-' + item.parent).addClass('category-' + item.id);
+                    }
+                    $('li.category-' + item.id).data("address", item.navigation);
+                    // console.log($('li.category-' + item.id).data('address'));
+                    // <li class = "category-id  data-address = "List<String navigation" /> 
+                }
+            });
+        })
+
+
+        // $(document).ready(function () {
+        //     const $ul = $('<ul>').addClass('category-0').appendTo('#header');
+
+        //     $.each(data, function (index, item) {
+
+        //         if ($('ul').hasClass('category-' + item.parent) === false) {
+        //             $('li.category-' + item.parent).after('<ul class = "category-' + item.parent + '">');
+        //         }
+
+        //         const $liList = '<li>' + item.name + '</li>'
+        //         $($liList).appendTo('ul.category-' + item.parent).addClass('category-' + item.id);
+        //     });
+        // })
+
+    </script>
 </body>
 
 </html>
