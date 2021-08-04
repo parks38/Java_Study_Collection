@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"> </script>
+</head>
+
+<body>
+    <p> text</p>
+    <p class="middle"> Middle <span>text</span></p>
+    <p>text</p>
+
+    <script>
+        // p 요소에 class=middle 골라 얼마나 많은 요소가 있는지 
+        console.log($("p").filter(".middle").length);  // 1
+        // filter 취소 
+        console.log($("p").filter(".middle").end().length); // 3
+        // filter && find 모두 취소 
+        console.log($("p").filter(".middle").find("span").end().end().length); // 3
+    </script>
+</body>
+
+</html>

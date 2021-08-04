@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"> </script>
+    <title>Document</title>
+</head>
+
+<body>
+    <p> Hello </p>
+
+    <script>
+        $(document).ready(function () {
+            var $p = $("p").click(function () {
+                $(this).css("background-color", "yellow");
+            });
+            // p 의 요소 임시 제거
+            $("p").detach();
+
+            // remove 이용시 요소에 대한 데이터 = 이벤트 제거 
+            //$("p").remove();
+
+            // click 의 요소를 가지고 있는 + 빨간색 text 
+            $p.css("color", "red");
+            $p.appendTo("body");
+        });
+    </script>
+</body>
+
+</html>
