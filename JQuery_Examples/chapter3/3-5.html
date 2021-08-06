@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"> </script>
+</head>
+
+<body>
+    <ol>
+        <li> A</li>
+        <li> AB</li>
+        <li> AC</li>
+        <li> AD</li>
+        <li> AE </li>
+        <li> AR </li>
+        <li> asd </li>
+        <li> Aasd</li>
+        <li> Asd</li>
+        <li> Aweq</li>
+    </ol>
+    <!-- the first three authors are: A, AB, AC -->
+    <script>
+        $(document).ready(function () {
+            var arr = $.map($("li"), function (item, index) {
+                while (index < 3) {
+                    return $(item).html();
+                }
+                return null;
+            });
+
+            $(document.body).append("<span> the first three authors are:"
+                + arr.join(",") + "</span>");
+        })
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"> </script>
+    <title>Document</title>
+</head>
+
+<body>
+    <div>
+        <a href="" class="external"> link </a>
+        <a href="" class="external"> link </a>
+        <a href="" class="parentA">
+            <a href="" class="external"> link </a>
+            <a href="" class="external"> link </a>
+        </a>
+        <a href=""> link </a>
+        <a href=""> link </a>
+
+        <div class="parentA">
+            <a href="" class="external"> link </a>
+            <a href="" class="external"> link </a>
+        </div>
+
+    </div>
+
+    <script>
+        // a 요소 중 external class 를 가지고 있는 경우 
+        alert($("a").filter(".external").length); // 4
+        // 선택된 집합 요소의 자식 중에 요소를 찾음 
+        // 모두 a 요소이기 때문에 정확히 어떤요소의 자식요소인지 확인 불가 
+        alert($("a").find(".external").length); // 0
+        // div 안의 external class 를 가지고 있는 요소 
+        alert($("div").find(".external").length); // 4
+        // 일단 a 태그 안에는 children 들어갈수 없음. 
+        alert($(".parentA").find(".external").length);
+    </script>
+</body>
+
+</html>

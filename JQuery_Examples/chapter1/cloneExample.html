@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"> </script>
+</head>
+
+<body>
+    <textarea class="copy" name="w3review" rows="4" cols="50">
+        At w3schools.com you will learn how to make a website. They offer free tutorials in all web development technologies.
+    </textarea>
+    <button type="button">Click Me!</button>
+
+    <br> <br>
+    <div></div>
+
+    <script>
+        $(document).ready(function () {
+            $("button").click(function () {
+                //alert("hello");
+                $("div").append($("textarea.copy").clone(true));
+                // clone 의 경우는 
+                // jquery object 를 clone 해야하지 DOM node 를 하면 안됨. 
+            });
+        });
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"> </script>
+</head>
+
+<body>
+    <h2> Eastern Conference </h2>
+    <ol id="east">
+        <li> east 1</li>
+        <li> east 1</li>
+        <li> east 1</li>
+        <li> east 1</li>
+        <li> east 1</li>
+        <li> east 1</li>
+        <li> east 1</li>
+    </ol>
+
+    <h2> Western Conference </h2>
+    <ol id="west">
+        <li> west 1</li>
+        <li> west 1</li>
+        <li> west 1</li>
+        <li> west 1</li>
+        <li> west 1</li>
+        <li> west 1</li>
+        <li> west 1</li>
+    </ol>
+
+    <script>
+        $(document).ready(function () {
+            // 7번째 리스트 밑에 줄 
+            $("ol#east > li").eq(6).css("border-bottom", "1px solid black")
+
+            var lis = $("ol li").get().reverse();
+            // == $("ol li").toArray().reverse();
+            $.each(lis, function (i) {
+                $("ol#east").append("<li>" + lis[i].innerHTML + "</li>");
+            })
+        });
+    </script>
+</body>
+
+</html>
