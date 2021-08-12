@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>document.execCommand('copy')</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="commands.js"></script>
+    <style>
+      #hiddencontent{
+        width:1px;
+        height: 1px;
+        overflow: hidden;
+      }
+    </style>
+  </head>
+  <body>
+    <p>
+      Some text to be selected.
+    </p>
+    <button type="button" class="btnCopy">Copy selection to clipboard</button>
+    <hr>
+
+    <div class="" id="copydiv">
+      Some text inside a div.
+    </div>
+    <button type="button" class="btnCopyTarget" data-target="copydiv">Copy above div</button>
+    <hr>
+    
+    <script>
+$(function(){
+
+  $('.btnCopyTarget').on('click',function(evt){
+    console.log(evt);
+    console.log('IS COPY SUPPORTED?:',document.queryCommandSupported('copy'));
+    var targetid = $(this).data('target'); //copydiv
+    var target = $('#'+targetid); // #copydiv
+    if(target.is('input,textarea')){
+      console.log('SIMPLE SELECT');
+      target.select(); 
+    }else{
+      console.log('ADVANCED SELECT');
+      selectElement(target[0]);
+    }
+    console.log('document.execCommand(\'copy\') RESULT:',document.execCommand('copy'));
+  })
+})
+var selectElement = function(element){
+  if(window.getSelection){
+    console.log('window.getSelection');
+    var range = document.createRange();
+    range.selectNodeContents(element);
+    window.getSelection().removeAllRanges();
+    window.getSelection().addRange( range );
+  }else if(document.selection){
+    console.log('document.selection');
+    var range = document.body.createTextRange();
+    range.moveToElementText(element);
+    range.select();
+  }else{
+    console.error('COULDN\'T SELECT :/');
+  }
+}
+    </script>
+
+
+</body>
+</html>
