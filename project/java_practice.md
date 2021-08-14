@@ -4,16 +4,5 @@
 Caused by: org.apache.ibatis.reflection.ReflectionException:  <br>
 There is no getter for property named 'fromdate' in 'class java.lang.String' <br>
 
-<if test="id != null" > 
-</if>
-
-<br>
-* 본문 복사하기 with html format 
-```
-<div class="content">
-  <p> hello </p>
-  <p> 
-    <strong> title </strong>
-  </p>
-</div>
-```
+- parameterVO 로 받아서 switch 이용해서 선택된 parameter 에 대한 값을 실행시키는 법
+- Generics switch 
