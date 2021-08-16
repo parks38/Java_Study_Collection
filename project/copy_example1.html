@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>document.execCommand('copy')</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="commands.js"></script>
+    <style>
+      #hiddencontent{
+        width:1px;
+        height: 1px;
+        overflow: hidden;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="" id="copydiv" >
+      Some text inside a div.
+    </div>
+    <button type="button" class="btnCopyTarget" data-target="copydiv">Copy above div</button>
+    <hr>
+    
+    <script>
+$(function(){
+
+  $('.btnCopyTarget').on('click',function(evt){
+    console.log(evt);
+    console.log('IS COPY SUPPORTED?:',document.queryCommandSupported('copy'));
+    var targetid = $(this).data('target'); //copydiv
+    var target = $('#'+targetid); // #copydiv
+    alert('ADVANCED SELECT');
+    selectElement(target[0]);
+    document.execCommand('copy')
+  })
+})
+var selectElement = function(element){
+// 선택된 텍스트의 범위를 나타내는 selection 
+// toString 반환 
+  if(window.getSelection){  
+    alert("window selection"); //nothing 
+    var range = document.createRange(); // return new range 
+    range.selectNodeContents(element); // target[0]
+    window.getSelection().removeAllRanges();
+    window.getSelection().addRange( range );
+  }
+}
+    </script>
+
+
+</body>
+</html>
