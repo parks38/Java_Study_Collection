@@ -14,8 +14,13 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
+  /**
+   * Bcrypt itself creates a new password everytime it takes the input. due to salt
+   * therfore need to use PasswordEncoder
+   * @return
+   */
   @Bean
-  public PasswordEncoder getPasswordEncoder() {
+  public PasswordEncoder passwordEncoder() {
     return new BCryptPasswordEncoder();
   }
 

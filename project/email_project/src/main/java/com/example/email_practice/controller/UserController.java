@@ -4,6 +4,7 @@ import com.example.email_practice.domain.User;
 import com.example.email_practice.repository.UserRepository;
 import com.example.email_practice.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,28 +25,29 @@ public class UserController {
    * creating password authentication
    * @return
    */
-  @PostMapping("/user/join")
-  public String join(@RequestBody String password) {
-
-    boolean result = userService.checkPasswordMatch(encodePassword(password));
-    if (result) return "newpassword";
-    else return "join";
+  @RequestMapping("/user/form")
+  public String form(@RequestBody(required = false) User user) {
+  if(user != null) {
+    boolean result = userService.checkPasswordMatch(user.getPassword());
+    if (result) {
+      System.out.println("password match");
+    } else {
+      System.out.println("password fail");
+    }
+  }
+    return "join";
   }
 
-  @GetMapping("/user/form")
-  public String form() {
+  @GetMapping("/user/newForm")
+  public String newpassword() {
 
-    return "join";
+    return "newpassword";
   }
 
   @RequestMapping("/user/changepassword")
   public void changePassword(@RequestBody User user) {
-    user.setPassword(encodePassword(user.getPassword()));
+    user.setPassword(passwordEncoder.encode(user.getPassword()));
     userService.insertPassword(user);
     System.out.println("saved");
-  }
-
-  private String encodePassword(String password) {
-    return passwordEncoder.encode(password);
   }
 }
