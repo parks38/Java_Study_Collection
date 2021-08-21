@@ -114,9 +114,6 @@
           data: JSON.stringify(user),
           contentType: 'application/json; charset=utf-8',
           dataType: 'json'
-        }).done(function (r) {
-          console.log(r);
-          alert('성공');
         });
       });
     </script>
