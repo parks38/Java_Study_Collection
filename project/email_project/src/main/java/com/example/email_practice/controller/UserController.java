@@ -31,6 +31,7 @@ public class UserController {
     boolean result = userService.checkPasswordMatch(user.getPassword());
     if (result) {
       System.out.println("password match");
+      return "newpassword";
     } else {
       System.out.println("password fail");
     }
