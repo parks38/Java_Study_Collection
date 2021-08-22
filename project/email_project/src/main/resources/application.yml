@@ -20,7 +20,6 @@ spring:
 
   jpa:
     open-in-view: true
-    hibernate:
     show-sql: true
     properties:
       hibernate.format_sql: true
