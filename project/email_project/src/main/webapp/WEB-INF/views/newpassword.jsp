@@ -107,7 +107,7 @@
             <label for="authnewPass">re-new Password</label>
             <input type="password" id="authnewPass">
         </div>
-        <input type="submit" id="submit" class="btn btn-primary" value="Enter">
+        <input type="button" id="submit" class="btn btn-primary" value="Enter">
     </form>
     <br>
 </div>
