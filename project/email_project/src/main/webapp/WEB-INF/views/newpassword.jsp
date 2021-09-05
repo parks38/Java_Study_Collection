@@ -72,7 +72,7 @@
         outline: 0px;
         color: whitesmoke;
       }
-      input[type="submit"] {
+      input[type="button"] {
         width: 100%;
         padding: 14px;
         font-size: 16px;
@@ -80,7 +80,7 @@
         margin-top: 20px;
         transition: background 300ms;
       }
-      input[type="submit"]:hover {
+      input[type="button"]:hover {
         cursor: pointer;
         background: rgba(255, 255, 255, 0.6);
       }
@@ -104,34 +104,47 @@
             <input type="password" id="password">
             <label for="newPassword">new Password</label>
             <input type="password" id="newPassword">
-            <label for="authnewPass">re-new Password</label>
-            <input type="password" id="authnewPass">
+            <label for="reNewPassword">re-new Password</label>
+            <input type="password" id="reNewPassword">
         </div>
-        <input type="button" id="submit" class="btn btn-primary" value="Enter">
+        <input type="button" onclick="changePassword()" value="Enter" id="submit" class="btn btn-primary">
+        <br>
     </form>
-    <br>
 </div>
 
 <script>
-  $("#submit").click(function () {
-    if ($("#newPassword").val() !== $("#authnewPass").val()) {
-      alert("new password does not match");
+  function changePassword() {
+    var password = $("#password").val();
+    var newPassword = $("#newPassword").val();
+    var reNewPassword = $("#reNewPassword").val();
+
+    // 빈칸 확인
+    if (password === "" || newPassword === "" || reNewPassword === "") {
+      alert("fill in the text area");
+      return;
+      // 새로운 패스워드 일치 확인
+    } else if (newPassword !== reNewPassword) {
+      alert("newPassword does not match re-newPassword");
+      return;
     }
-    var user = {
-      "password": $("#password").val()
+
+    var passwordUpdate = {
+      password: password,
+      newPassword : newPassword
     };
 
     $.ajax({
       type: 'POST',
-      url: '/user/join',
-      data: JSON.stringify(user),
-      contentType: 'application/json; charset=utf-8',
-      dataType: 'json',
-      success : function(error) {
-        alert("비밀번호 확인 완료");
-      }
+      url: '/user/changepassword',
+      data: JSON.stringify(passwordUpdate),
+      contentType: 'application/json; charset=utf-8'
+    }).done(function(data) {
+      alert("new password saved");
+      location.href="/main";
+    }).fail(function(data) {
+      alert("wrong password");
     });
-  });
+  }
 </script>
 </body>
 </html>

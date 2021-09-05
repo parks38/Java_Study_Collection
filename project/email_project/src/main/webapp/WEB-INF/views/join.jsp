@@ -72,7 +72,7 @@
         outline: 0px;
         color: whitesmoke;
       }
-      input[type="submit"] {
+      input[type="button"] {
         width: 100%;
         padding: 14px;
         font-size: 16px;
@@ -80,7 +80,7 @@
         margin-top: 20px;
         transition: background 300ms;
       }
-      input[type="submit"]:hover {
+      input[type="button"]:hover {
         cursor: pointer;
         background: rgba(255, 255, 255, 0.6);
       }
@@ -97,25 +97,37 @@
                 <label for="password">password</label>
                 <input type="password" id="password">
             </div>
-            <input type="submit" id="submit" class="btn btn-primary" value="Enter">
+            <input type="button" onclick="login()" value="submit">
+            <br>
         </form>
-        <br>
     </div>
 
-    <script>
-      $("#submit").click(function () {
-        var user = {
-          "password": $("#password").val()
-        };
+<script>
+  function login() {
+    var password = $("#password").val();
 
-        $.ajax({
-          type: 'POST',
-          url: '/user/form',
-          data: JSON.stringify(user),
-          contentType: 'application/json; charset=utf-8',
-          dataType: 'json'
-        });
-      });
-    </script>
+    //  빈칸 확인
+    if (password === "") {
+      //alert("비밀번호를 입력해 주세요.");
+      alert("please enter password");
+      return;
+    }
+
+    var user = {
+      password: password
+    };
+
+    $.ajax({
+      type: "POST",
+      url: "/user/login",
+      data: JSON.stringify(user),
+      contentType: "application/json; charset=urf-8",
+    }).success(function (data) {
+      location.href = "/user/newForm";
+    }).fail(function (data) {
+      alert("wrong password");
+    });
+  }
+</script>
 </body>
 </html>
