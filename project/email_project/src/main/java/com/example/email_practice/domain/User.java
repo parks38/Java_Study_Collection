@@ -1,5 +1,6 @@
 package com.example.email_practice.domain;
 
+import java.io.Serializable;
 import java.sql.Timestamp;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -20,7 +21,7 @@ import org.hibernate.annotations.CreationTimestamp;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class User {
+public class User implements Serializable {
   @Id //primary key
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private int id; //sequence, auto-increment

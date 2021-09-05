@@ -2,12 +2,11 @@ package com.example.email_practice.service;
 
 import com.example.email_practice.domain.User;
 import com.example.email_practice.repository.UserRepository;
-import com.example.email_practice.util.PasswordWrongException;
+import com.example.email_practice.util.HashCalculator.Hash;
+import java.util.Objects;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCrypt;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
+
 import org.springframework.stereotype.Service;
 
 @Service
@@ -15,25 +14,40 @@ public class UserService {
   @Autowired
   private UserRepository userRepository;
 
-  @Autowired
-  private PasswordEncoder passwordEncoder;
-
   /**
-   * charSequence("1111", encodedPassword); 로 하면 작동하는데
-   * 값을 받아 넣으면 에러.
-   * String and charSequence creates same content but not the same
-   * password.equals("1111"); //false
-   * parameter 을 string 으로 받기보다는 객체로 받아서 넘기기
+   * 패스워드 일치 확인
+   *
+   * @param password
+   * @return
+   * @throws Exception
    */
-  public boolean checkPasswordMatch(String password) {
-    Optional<User> user = userRepository.findById(4);
-    //pwdEncoder.matches(입력된 비밀번호(), 암호화된 비밀번호())
-    return user.filter(value -> passwordEncoder.matches(password, value.getPassword())).isPresent();
+  public boolean checkPasswordMatch(String password) throws Exception {
+
+    Optional<User> user = userRepository.findById(2);
+
+    return user.isPresent() &&
+        Objects.equals(user.get().getPassword(), Hash.SHA256.checksum(password));
   }
 
+  /**
+   * 새로운 패스워드 저장
+   *
+   * @param newPassword
+   * @return
+   */
+  public Optional<User> insertPassword(String newPassword) {
 
-  public void insertPassword(User user) {
-    userRepository.save(user);
-    System.out.println(passwordEncoder.matches("1111", user.getPassword()));
+    Optional<User> user = userRepository.findById(2);
+
+    user.ifPresent(selectUser ->{
+      try {
+        selectUser.setPassword(Hash.SHA256.checksum(newPassword));
+        userRepository.save(selectUser);
+      } catch (Exception e) {
+        e.printStackTrace();
+      }
+    });
+
+    return user;
   }
 }
